@@ -24,7 +24,11 @@ function checksExistsUserAccount(request, response, next) {
 }
 
 function checksCreateTodosUserAvailability(request, response, next) {
-  // Complete aqui
+  const { user } = request
+
+  if (user.pro) {
+    return next()
+  }
 }
 
 function checksTodoExists(request, response, next) {
