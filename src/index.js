@@ -52,7 +52,7 @@ function checksTodoExists(request, response, next) {
   if (!validate(id)) {
     return response.status(400).json({ error: "This id is not uuid" })
   }
-  const foundTodo = foundUser.todos.some(todo => todo.id === id)
+  const foundTodo = foundUser.todos.find(todo => todo.id === id)
 
   if (!foundTodo) {
     return response.status(404).json({ error: "This todo not exists!" })
