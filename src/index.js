@@ -36,6 +36,10 @@ function findUserById(request, response, next) {
 
   const foundUser = users.find(user => user.id === id)
 
+  if (!foundUser) {
+    return response.status(404).json({ error: "This user not exists!" })
+  }
+
   request.user = foundUser
  
   return next()
