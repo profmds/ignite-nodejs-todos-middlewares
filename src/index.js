@@ -17,7 +17,7 @@ function checksExistsUserAccount(request, response, next) {
   if (!foundUser) {
     return response.status(404).json({ error: "This user not exists!" })
   }
-  
+
   request.user = foundUser
 
   return next()
@@ -32,7 +32,13 @@ function checksTodoExists(request, response, next) {
 }
 
 function findUserById(request, response, next) {
-  // Complete aqui
+  const { id } = request.params
+
+  const foundUser = users.find(user => user.id === id)
+
+  request.user = foundUser
+ 
+  return next()
 }
 
 app.post('/users', (request, response) => {
