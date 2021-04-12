@@ -28,7 +28,16 @@ function checksCreateTodosUserAvailability(request, response, next) {
 }
 
 function checksTodoExists(request, response, next) {
-  // Complete aqui
+  const { username } = request.headers
+  const { id } = request.params
+
+  const foundUser = users.find(user => user.username === username)
+  const foundTodo = foundUser.todos.some(todo => todo.id === id)
+
+  request.user = foundUser
+  request.todo = foundTodo
+
+  return next()
 }
 
 function findUserById(request, response, next) {
