@@ -29,6 +29,14 @@ function checksCreateTodosUserAvailability(request, response, next) {
   if (user.pro) {
     return next()
   }
+
+  const countTodos = user.todos.length
+
+  if (countTodos >= 10) {
+    return response.status(403).json({ error: "You are not permited to create a new todo, because your plan is not pro!" })
+  }
+
+  return next()
 }
 
 function checksTodoExists(request, response, next) {
