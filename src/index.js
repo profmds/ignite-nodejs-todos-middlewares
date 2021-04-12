@@ -36,6 +36,10 @@ function checksTodoExists(request, response, next) {
   if (!foundUser) {
     return response.status(404).json({ error: "This user not exists!" })
   }
+
+  if (!validate(id)) {
+    return response.status(400).json({ error: "This id is not uuid" })
+  }
   const foundTodo = foundUser.todos.some(todo => todo.id === id)
 
   request.user = foundUser
